@@ -27,7 +27,9 @@ In Istio's traditional model, Envoy proxies are deployed as sidecars within the 
 
 
 Ambient Mesh deploys Waypoint proxies, which are connected through Z-tunnels for policy enforcement when necessary - traffic is routed through Z-tunnels for L4 processing, and when L7 processing is required, such as request routing, the mesh automatically creates Waypoint proxies and redirects traffic accordingly. Each Node in the mesh utilizes a single Z-tunnel process for all its Pods. Adding new Pods to mesh does not require changes in their manifests.
-![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/17a9fccc-02ed-40a0-a2f8-52dc980f04e6)
+<!-- ![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/17a9fccc-02ed-40a0-a2f8-52dc980f04e6) -->
+
+![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/78169141/bb2a1e1b-a30a-4931-a164-2cc2e80fa2c5)
 
 
 **Technology stack**
