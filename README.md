@@ -22,9 +22,13 @@ Code documentation to the project can be found [here](https://istio.io/v1.15/blo
 
 **Theoretical background**
 
+In Istio's traditional model, Envoy proxies are deployed as sidecars within the pods of workloads, resulting in double-processing of traffic and increased resource consumption:
 ![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/3352e564-9c7d-4fb9-8519-5a5b850bda5d)
 
-![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/ac2efe54-c4db-4240-9c2a-7ae08e53a00a)
+
+Ambient Mesh deploys Waypoint proxies, which are connected through Z-tunnels for policy enforcement when necessary - traffic is routed through Z-tunnels for L4 processing, and when L7 processing is required, such as request routing, the mesh automatically creates Waypoint proxies and redirects traffic accordingly. Each Node in the mesh utilizes a single Z-tunnel process for all its Pods. Adding new Pods to mesh does not require changes in their manifests.
+![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/17a9fccc-02ed-40a0-a2f8-52dc980f04e6)
+
 
 **Technology stack**
 - Amazon EKS
@@ -35,6 +39,9 @@ Code documentation to the project can be found [here](https://istio.io/v1.15/blo
 - Knative (?)
 
 ### 3. Case study concept description
+
+The primary goal of this project is to conduct a comprehensive analysis focusing on the resource utilization and response time metrics of a REST API implemented using the Python. This API will be deployed both in Service Mesh and Ambient Mesh environments, allowing for a detailed comparison of their respective performance characteristics and efficiencies.
+
 ### 4. Solution architecture
 ### 5. Environment configuration description 
 ### 6. Installation method
