@@ -43,6 +43,7 @@ resource "aws_eks_node_group" "this" {
   node_role_arn = data.aws_iam_role.lab-role.arn
   subnet_ids = data.aws_subnets.this.ids
 
+  instance_types = [ "t3.xlarge" ]
 
   scaling_config {
     desired_size = 2
@@ -54,3 +55,14 @@ resource "aws_eks_node_group" "this" {
   }
 }
 
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name   = "vpc-cni"
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name   = "coredns"
+}
+
+# istioctl install --set profile=ambient --skip-confirmation
