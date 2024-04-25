@@ -45,9 +45,58 @@ Ambient Mesh deploys Waypoint proxies, which are connected through Z-tunnels for
 The primary goal of this project is to conduct a comprehensive analysis focusing on the resource utilization and response time metrics of a REST API implemented using the Python. This API will be deployed both in Service Mesh and Ambient Mesh environments, allowing for a detailed comparison of their respective performance characteristics and efficiencies.
 
 ### 4. Solution architecture
-### 5. Environment configuration description 
+### 5. Environment configuration description
+
+The environment consists of a set of python microservices that will generate load on the cluster, 
+
+that will bedeployed on a aws EKS cluster with 2 worker nodes of type `t3.xlarge`, 
+
+with istio istalled using either the default or ambient profile depending on the currently tested configuration
+
 ### 6. Installation method
 ### 7. How to reproduce
+
+#### Required commandline tools
+| name      | version | installation instructions |
+| --------- | ------- | ------------------------- |
+| aws-cli   | >~ 2.15 | https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions
+| terraform | >~ 1.8  | https://developer.hashicorp.com/terraform/install?product_intent=terraform
+| istioctl  | >~ 1.21 | https://istio.io/latest/docs/setup/getting-started/#download
+
+#### Reproduction steps
+
+##### Create cluster
+
+Enter terraform directory, initialize and apply terraform configuration (valid aws cli credentials required).
+```bash
+cd terraform
+terraform init
+terraform apply
+```
+
+##### Fetch cluster credentials
+Update .kube/config using aws EKS credentials
+
+```
+aws eks update-kubeconfig --name=ambient-mesh
+```
+
+
+##### Install service mesh
+Install istio service mesh in either default or ambient profile
+
+```bash
+istioctl install --skip-confirmation 
+```
+or 
+```bash
+istioctl install --set profile=ambient --skip-confirmation 
+```
+
+##### Deploy test services
+TODO ...
+
+
 ### 8. Demo deployment test
 ### 9. Summary - conclusions
 ### 10. References
