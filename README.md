@@ -44,6 +44,10 @@ Ambient Mesh deploys Waypoint proxies, which are connected through Z-tunnels for
 
 The primary goal of this project is to conduct a comprehensive analysis focusing on the resource utilization and response time metrics of a REST API implemented using the Python. This API will be deployed both in Service Mesh and Ambient Mesh environments, allowing for a detailed comparison of their respective performance characteristics and efficiencies.
 
+In addition to comparing resource utilization and response time metrics, we plan to measure performance, bandwidth, and startup time. These additional metrics will provide insights into the overall efficiency and scalability of the deployed environments, enabling us to make informed decisions about their suitability for different use cases and workloads.
+
+
+
 ### 4. Solution architecture
 ### 5. Environment configuration description
 
