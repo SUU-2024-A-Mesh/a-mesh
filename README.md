@@ -46,6 +46,7 @@ The primary goal of this project is to conduct a comprehensive analysis focusing
 
 In addition to comparing resource utilization and response time metrics, we plan to measure performance, bandwidth, and startup time. These additional metrics will provide insights into the overall efficiency and scalability of the deployed environments, enabling us to make informed decisions about their suitability for different use cases and workloads.
 
+To simulate artificial workload, python application will send images between different instances and perform image processing operations to increase resource usage.
 
 
 ### 4. Solution architecture
