@@ -50,6 +50,8 @@ In addition to comparing resource utilization and response time metrics, we plan
 
 To simulate artificial workload, python application will send images between different instances and perform image processing operations to increase resource usage.
 
+*TODO: scheme*
+
 ### 5. Environment configuration description
 
 The environment consists of a set of python microservices that will generate load on the cluster, 
