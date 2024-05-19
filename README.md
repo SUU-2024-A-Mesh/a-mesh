@@ -74,31 +74,27 @@ with istio istalled using either the default or ambient profile depending on the
 
 ##### Create cluster
 
-Enter terraform directory, initialize and apply terraform configuration (valid aws cli credentials required).
+Enter terraform directory, initialize terraform (valid aws cli credentials required).
 ```bash
 cd terraform
 terraform init
-terraform apply
 ```
+
+Deploy the cluster with service mesh use either mode=ambient or mode=regular depending on the type of the mesh you wish to deploy
+```bash
+# example for mode=ambient
+terraform apply -var mode=ambient
+```
+
 
 ##### Fetch cluster credentials
-Update .kube/config using aws EKS credentials
+Update .kube/config using aws EKS credentials, use --name=ambient-mesh or --name=regular-mesh depending on the mode selected earlier
 
-```
+```bash
+# example for --name=ambient-mesh
 aws eks update-kubeconfig --name=ambient-mesh
 ```
 
-
-##### Install service mesh
-Install istio service mesh in either default or ambient profile
-
-```bash
-istioctl install --skip-confirmation 
-```
-or 
-```bash
-istioctl install --set profile=ambient --skip-confirmation 
-```
 
 ##### Deploy test services
 TODO ...

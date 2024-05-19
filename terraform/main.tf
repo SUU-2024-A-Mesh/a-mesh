@@ -4,12 +4,43 @@ terraform {
       source  = "hashicorp/aws"
       version = ">=5.42.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "2.13.2"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.30.0"
+    }
   }
 }
 
 provider "aws" {
   region = "us-east-1"
 }
+
+provider "helm" {
+  kubernetes {
+    host                   = aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", aws_eks_cluster.this.name]
+      command     = "aws"
+    }
+  }
+}
+
+provider "kubernetes" {
+    host                   = aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", aws_eks_cluster.this.name]
+      command     = "aws"
+    }
+}
+
 data "aws_iam_role" "lab-role" {
   name = "LabRole"
 }
@@ -30,7 +61,7 @@ data "aws_subnets" "this" {
 
 
 resource "aws_eks_cluster" "this" {
-  name = "ambient-mesh"
+  name = "${var.mode}-mesh"
   role_arn = data.aws_iam_role.lab-role.arn
 
   vpc_config {
@@ -65,4 +96,27 @@ resource "aws_eks_addon" "coredns" {
   addon_name   = "coredns"
 }
 
-# istioctl install --set profile=ambient --skip-confirmation
+module "ambient" {
+  source = "./modules/ambient"
+
+  count = var.mode == "ambient" ? 1 : 0
+
+  depends_on = [ aws_eks_addon.coredns, aws_eks_addon.vpc_cni, aws_eks_cluster.this, aws_eks_node_group.this ]
+}
+
+module "regular" {
+  source = "./modules/regular"
+
+  count = var.mode == "regular" ? 1 : 0
+
+  depends_on = [ aws_eks_addon.coredns, aws_eks_addon.vpc_cni, aws_eks_cluster.this, aws_eks_node_group.this ]
+}
+
+variable "mode" {
+  type = string
+
+  validation {
+    condition = contains(["regular", "ambient"], var.mode)
+    error_message = "mode must be one of regular, ambient"
+  }
+}
