@@ -112,6 +112,12 @@ module "regular" {
   depends_on = [ aws_eks_addon.coredns, aws_eks_addon.vpc_cni, aws_eks_cluster.this, aws_eks_node_group.this ]
 }
 
+module "common" {
+  source = "./modules/common"
+
+  depends_on = [ module.ambient, module.regular ]
+}
+
 variable "mode" {
   type = string
 
