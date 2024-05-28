@@ -97,7 +97,21 @@ aws eks update-kubeconfig --name=ambient-mesh
 
 
 ##### Deploy test services
-TODO ...
+```bash
+change aws credentials (output: json)
+```
+
+
+```bash
+aws eks describe-cluster --region us-east-1 --name <your cluster> --query cluster.status
+aws eks --region us-east-1 update-kubeconfig --name <your cluster>
+```
+
+
+```bash
+kubectl apply -f templates/release/kubernetes/manifests.yaml
+```
+
 
 
 ### 8. Demo deployment test
