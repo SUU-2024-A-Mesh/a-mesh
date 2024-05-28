@@ -24,6 +24,7 @@ metadata:
     app: emailservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: emailservice
@@ -71,6 +72,7 @@ metadata:
     app: emailservice
     version: v2
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: emailservice
@@ -131,6 +133,7 @@ metadata:
     app: checkoutservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: checkoutservice
@@ -204,6 +207,7 @@ metadata:
     app: recommendationservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: recommendationservice
@@ -268,6 +272,7 @@ metadata:
     app: frontend
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: frontend
@@ -368,6 +373,7 @@ metadata:
     app: paymentservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: paymentservice
@@ -422,6 +428,7 @@ metadata:
     app: productcatalogservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: productcatalogservice
@@ -471,6 +478,7 @@ metadata:
     app: productcatalogservice
     version: v2
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: productcatalogservice
@@ -533,6 +541,7 @@ metadata:
     app: cartservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: cartservice
@@ -591,10 +600,11 @@ kind: Deployment
 metadata:
   name: loadgenerator
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: loadgenerator
-  replicas: 1
+  replicas: 4
   template:
     metadata:
       labels:
@@ -611,7 +621,7 @@ spec:
         - name: FRONTEND_ADDR
           value: "frontend:80"
         - name: USERS
-          value: "10"
+          value: "1000"
         resources:
           requests:
             cpu: 300m
@@ -628,6 +638,7 @@ metadata:
     app: currencyservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: currencyservice
@@ -689,6 +700,7 @@ metadata:
     app: shippingservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: shippingservice
@@ -738,6 +750,7 @@ metadata:
     app: shippingservice
     version: v2
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: shippingservice
@@ -787,6 +800,7 @@ metadata:
     app: shippingservice
     version: v3
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: shippingservice
@@ -849,6 +863,7 @@ metadata:
     app: redis-cart
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: redis-cart
@@ -907,6 +922,7 @@ metadata:
     app: adservice
     version: v1
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: adservice

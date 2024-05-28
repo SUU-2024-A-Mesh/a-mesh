@@ -77,9 +77,9 @@ resource "aws_eks_node_group" "this" {
   instance_types = [ "t3.xlarge" ]
 
   scaling_config {
-    desired_size = 2
-    min_size = 2
-    max_size = 2
+    desired_size = var.mode == "ambient" ? 3 : 5
+    min_size = var.mode == "ambient" ? 3 : 5
+    max_size = var.mode == "ambient" ? 3 : 5
   }
   update_config {
     max_unavailable = 1
