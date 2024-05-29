@@ -5,11 +5,10 @@
 3. Case study concept description
 4. Solution architecture
 5. Environment configuration description 
-6. Installation method
-7. How to reproduce
-8. Demo deployment test
-9. Summary - conclusions
-10. References
+6. How to reproduce
+7. Demo deployment test
+8. Summary - conclusions
+9. References
 
 ### 1. Introduction
 Ambient Mesh is a new Istio data plane mode that’s designed for simplified operations, broader application compatibility, and reduced infrastructure cost. Ambient mesh gives users the option to forgo sidecar proxies in favor of a mesh data plane that’s integrated into their infrastructure, all while maintaining Istio’s core features of zero-trust security, telemetry, and traffic management.
@@ -62,8 +61,7 @@ that will bedeployed on a aws EKS cluster with 2 worker nodes of type `t3.xlarge
 
 with istio istalled using either the default or ambient profile depending on the currently tested configuration
 
-### 6. Installation method
-### 7. How to reproduce
+### 6. How to reproduce
 
 #### Required commandline tools
 | name      | version | installation instructions |
@@ -116,7 +114,7 @@ kubectl apply -f templates/release/kubernetes/manifests.yaml
 
 
 
-### 8. Demo deployment test
+### 7. Demo deployment test
 
 + #### Ambient Mesh
 ![image](https://github.com/SUU-2024-A-Mesh/a-mesh/assets/92889577/8a958d34-9447-4707-a8ae-c9b5afa88e29)
@@ -195,7 +193,7 @@ ip-172-31-35-113.ec2.internal   Ready    <none>   30m   v1.29.3-eks-ae9a62a
  Aggregated                                                     19466     0(0.00%)                                      80.60    0.00
 ```
 
-### 9. Summary - conclusions
+### 8. Summary - conclusions
 + Ambient Mesh is more capable of storing more nodes - we were able to fit 5, when on Service Mesh only 3.
 + We have observed more failed requests on Ambient Mesh in comparison to Service Mesh
 + Memory usage is about 1.7 times higher on Service Mesh
@@ -204,7 +202,7 @@ ip-172-31-35-113.ec2.internal   Ready    <none>   30m   v1.29.3-eks-ae9a62a
 Conclusion:
 Ambient Mesh is more economical solution than Service Mesh.
 
-### 10. References
+### 9. References
 + [GoogleCloud's Microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 + [Ambient Mesh documentation](https://istio.io/v1.15/blog/2022/introducing-ambient-mesh/)
 + [Istio Service Mesh](https://istio.io/latest/about/service-mesh/)
