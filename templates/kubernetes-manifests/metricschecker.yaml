@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: metrics-data-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-checker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-checker
+  template:
+    metadata:
+      labels:
+        app: metrics-checker
+    spec:
+      containers:
+      - name: metrics-checker
+        image: metrics-checker:latest
+        env:
+        - name: KUBERNETES_SERVICE_HOST
+          value: "kubernetes.default.svc"
+        - name: KUBERNETES_SERVICE_PORT
+          value: "443"
+        args: ["--interval", "6"]
+        volumeMounts:
+        - mountPath: "/data"
+          name: metrics-data
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+      volumes:
+      - name: metrics-data
+        emptyDir: {}
